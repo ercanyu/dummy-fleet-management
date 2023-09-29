@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+
+  java:
+    build:
+      context: infra2
+    ports:
+      - "8080:8080"
+    container_name: fm-api
+    links:
+      - fm-mongo
+    depends_on:
+      - fm-mongo
+    networks:
+      - shared-net
+
+  fm-mongo:
+    image: 'mongo'
+    ports:
+      - 27017:27017
+    container_name: fm-mongo
+    networks:
+      - shared-net
+
+networks:
+  shared-net:
+    driver: bridge
