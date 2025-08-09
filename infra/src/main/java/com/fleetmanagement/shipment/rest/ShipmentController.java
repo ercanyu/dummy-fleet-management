@@ -1,6 +1,5 @@
 package com.fleetmanagement.shipment.rest;
 
-import com.fleetmanagement.shipment.rest.dto.*;
 import com.fleetmanagement.common.rest.ApiResponse;
 import com.fleetmanagement.common.rest.BaseController;
 import com.fleetmanagement.common.rest.DataResponse;
@@ -24,32 +23,32 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/shipments")
 public class ShipmentController extends BaseController {
-  private final UseCaseHandler<Bag, BagCreate> bagCreateUseCaseHandler;
-  private final UseCaseHandler<Package, PackageCreate> packageCreateUseCaseHandler;
-  private final UseCaseHandler<List<Package>, PackageLoadToBag> packageLoadToBagUseCaseHandler;
+    private final UseCaseHandler<Bag, BagCreate> bagCreateUseCaseHandler;
+    private final UseCaseHandler<Package, PackageCreate> packageCreateUseCaseHandler;
+    private final UseCaseHandler<List<Package>, PackageLoadToBag> packageLoadToBagUseCaseHandler;
 
-  @PostMapping("/bags")
-  @ResponseStatus(HttpStatus.CREATED)
-  public ApiResponse<BagResponse> createBag(@Valid @RequestBody BagCreateRequest bagCreateRequest) {
-    Bag bag = bagCreateUseCaseHandler.handle(bagCreateRequest.toUseCase());
-    log.info("Bag {} is created for request {}", bag, bagCreateRequest);
-    return respond(BagResponse.fromModel(bag));
-  }
+    @PostMapping("/bags")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ApiResponse<BagResponse> createBag(@Valid @RequestBody BagCreateRequest bagCreateRequest) {
+        Bag bag = bagCreateUseCaseHandler.handle(bagCreateRequest.toUseCase());
+        log.info("Bag {} is created for request {}", bag, bagCreateRequest);
+        return respond(BagResponse.fromModel(bag));
+    }
 
-  @PostMapping("/packages")
-  @ResponseStatus(HttpStatus.CREATED)
-  public ApiResponse<PackageResponse> createPackage(
-      @Valid @RequestBody PackageCreateRequest packageCreateRequest) {
-    Package pkg = packageCreateUseCaseHandler.handle(packageCreateRequest.toUseCase());
-    log.info("Package {} is created for request {}", pkg, packageCreateRequest);
-    return respond(PackageResponse.fromModel(pkg));
-  }
+    @PostMapping("/packages")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ApiResponse<PackageResponse> createPackage(
+            @Valid @RequestBody PackageCreateRequest packageCreateRequest) {
+        Package pkg = packageCreateUseCaseHandler.handle(packageCreateRequest.toUseCase());
+        log.info("Package {} is created for request {}", pkg, packageCreateRequest);
+        return respond(PackageResponse.fromModel(pkg));
+    }
 
-  @PutMapping("/packages")
-  public ApiResponse<DataResponse<PackageResponse>> loadPackagesToBag(
-      @Valid @RequestBody PackageLoadToBagRequest request) {
-    List<Package> packages = packageLoadToBagUseCaseHandler.handle(request.toUseCase());
-    log.info("Package(s) {} loaded in to bag for request {}", packages, request);
-    return respond(packages.stream().map(PackageResponse::fromModel).toList());
-  }
+    @PutMapping("/packages")
+    public ApiResponse<DataResponse<PackageResponse>> loadPackagesToBag(
+            @Valid @RequestBody PackageLoadToBagRequest request) {
+        List<Package> packages = packageLoadToBagUseCaseHandler.handle(request.toUseCase());
+        log.info("Package(s) {} loaded in to bag for request {}", packages, request);
+        return respond(packages.stream().map(PackageResponse::fromModel).toList());
+    }
 }

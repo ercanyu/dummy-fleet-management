@@ -4,5 +4,5 @@ import com.fleetmanagement.common.model.UseCase;
 
 public interface UseCaseHandler<E, T extends UseCase> {
 
-  E handle(T useCase);
+    E handle(T useCase);
 }

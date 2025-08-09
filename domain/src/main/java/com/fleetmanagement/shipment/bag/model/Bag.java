@@ -13,21 +13,21 @@ import lombok.experimental.SuperBuilder;
 @Setter
 @ToString
 public class Bag extends Shipment {
-  private BagStatus bagStatus;
+    private BagStatus bagStatus;
 
-  @Override
-  public ShipmentType getShipmentType() {
-    return ShipmentType.BAG;
-  }
+    @Override
+    public ShipmentType getShipmentType() {
+        return ShipmentType.BAG;
+    }
 
-  @Override
-  public Integer getStatusValue() {
-    return bagStatus.getValue();
-  }
+    @Override
+    public Integer getStatusValue() {
+        return bagStatus.getValue();
+    }
 
-  @Override
-  public boolean isUnloadAvailableAt(Integer deliveryPoint) {
-    return deliveryPoint.equals(this.deliveryPoint)
-        && !deliveryPoint.equals(DeliveryPointType.BRANCH.getValue());
-  }
+    @Override
+    public boolean isUnloadAvailableAt(Integer deliveryPoint) {
+        return deliveryPoint.equals(this.deliveryPoint)
+                && !deliveryPoint.equals(DeliveryPointType.BRANCH.getValue());
+    }
 }

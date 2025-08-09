@@ -16,41 +16,41 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class BagCreateTest {
-  BagCreateUseCaseHandler bagCreateUseCaseHandler;
+    BagCreateUseCaseHandler bagCreateUseCaseHandler;
 
-  @BeforeEach
-  void setUp() {
-    bagCreateUseCaseHandler =
-        new BagCreateUseCaseHandler(new BagFakeDataAdapter(), new DeliveryPointFakeDataAdapter());
-  }
+    @BeforeEach
+    void setUp() {
+        bagCreateUseCaseHandler =
+                new BagCreateUseCaseHandler(new BagFakeDataAdapter(), new DeliveryPointFakeDataAdapter());
+    }
 
-  @Test
-  void should_create_bag() {
-    // given
-    BagCreate bagCreate =
-        new BagCreate("BAG_BARCODE", DeliveryPointType.DISTRIBUTION_CENTER.getValue());
+    @Test
+    void should_create_bag() {
+        // given
+        BagCreate bagCreate =
+                new BagCreate("BAG_BARCODE", DeliveryPointType.DISTRIBUTION_CENTER.getValue());
 
-    // when
-    Bag bag = bagCreateUseCaseHandler.handle(bagCreate);
+        // when
+        Bag bag = bagCreateUseCaseHandler.handle(bagCreate);
 
-    // then
-    assertThat(bag)
-        .isNotNull()
-        .returns("1", Shipment::getId)
-        .returns("BAG_BARCODE", Shipment::getBarcode)
-        .returns(BagStatus.CREATED, Bag::getBagStatus)
-        .returns(ShipmentType.BAG, Bag::getShipmentType)
-        .returns(DeliveryPointType.DISTRIBUTION_CENTER.getValue(), Shipment::getDeliveryPoint);
-  }
+        // then
+        assertThat(bag)
+                .isNotNull()
+                .returns("1", Shipment::getId)
+                .returns("BAG_BARCODE", Shipment::getBarcode)
+                .returns(BagStatus.CREATED, Bag::getBagStatus)
+                .returns(ShipmentType.BAG, Bag::getShipmentType)
+                .returns(DeliveryPointType.DISTRIBUTION_CENTER.getValue(), Shipment::getDeliveryPoint);
+    }
 
-  @Test
-  void should_throw_exception_when_delivery_point_not_exists() {
-    // given
-    BagCreate bagCreate = new BagCreate("BAG_BARCODE", 54);
+    @Test
+    void should_throw_exception_when_delivery_point_not_exists() {
+        // given
+        BagCreate bagCreate = new BagCreate("BAG_BARCODE", 54);
 
-    // when
-    assertThatExceptionOfType(FleetManagementApiException.class)
-        .isThrownBy(() -> bagCreateUseCaseHandler.handle(bagCreate))
-        .withMessage("Delivery Point doesn't exist.");
-  }
+        // when
+        assertThatExceptionOfType(FleetManagementApiException.class)
+                .isThrownBy(() -> bagCreateUseCaseHandler.handle(bagCreate))
+                .withMessage("Delivery Point doesn't exist.");
+    }
 }

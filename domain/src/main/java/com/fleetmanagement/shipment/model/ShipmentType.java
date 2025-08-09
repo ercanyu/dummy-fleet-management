@@ -6,8 +6,8 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum ShipmentType {
-  BAG("B"),
-  PACKAGE("P");
+    BAG("B"),
+    PACKAGE("P");
 
-  private final String value;
+    private final String value;
 }

@@ -6,7 +6,7 @@ import com.fleetmanagement.deliverypoint.usecase.command.DeliveryPointCreate;
 import java.util.Optional;
 
 public interface DeliveryPointDataPort {
-  DeliveryPoint create(DeliveryPointCreate deliveryPointCreate);
+    DeliveryPoint create(DeliveryPointCreate deliveryPointCreate);
 
-  Optional<DeliveryPoint> retrieveByValue(Integer value);
+    Optional<DeliveryPoint> retrieveByValue(Integer value);
 }

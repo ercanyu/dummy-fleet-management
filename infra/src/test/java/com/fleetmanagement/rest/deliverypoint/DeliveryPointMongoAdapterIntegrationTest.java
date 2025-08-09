@@ -15,38 +15,40 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DeliveryPointMongoAdapterIntegrationTest extends BaseIntegrationTest {
-  @Autowired DeliveryPointMongoRepository deliveryPointMongoRepository;
-  @Autowired DeliveryPointMongoAdapter deliveryPointMongoAdapter;
+    @Autowired
+    DeliveryPointMongoRepository deliveryPointMongoRepository;
+    @Autowired
+    DeliveryPointMongoAdapter deliveryPointMongoAdapter;
 
-  @Test
-  void should_create_delivery_point() {
-    // given
-    DeliveryPointCreate deliveryPointCreate = new DeliveryPointCreate("DELIVERY_POINT", 1);
+    @Test
+    void should_create_delivery_point() {
+        // given
+        DeliveryPointCreate deliveryPointCreate = new DeliveryPointCreate("DELIVERY_POINT", 1);
 
-    // when
-    DeliveryPoint deliveryPoint = deliveryPointMongoAdapter.create(deliveryPointCreate);
+        // when
+        DeliveryPoint deliveryPoint = deliveryPointMongoAdapter.create(deliveryPointCreate);
 
-    // then
-    Optional<DeliveryPointDocument> deliveryPointDocument =
-        deliveryPointMongoRepository.findById(deliveryPoint.getId());
-    assertThat(deliveryPointDocument).isPresent();
-    assertThat(deliveryPointDocument.get())
-        .returns("DELIVERY_POINT", DeliveryPointDocument::getName)
-        .returns(DeliveryPointType.BRANCH.getValue(), DeliveryPointDocument::getValue);
-  }
+        // then
+        Optional<DeliveryPointDocument> deliveryPointDocument =
+                deliveryPointMongoRepository.findById(deliveryPoint.getId());
+        assertThat(deliveryPointDocument).isPresent();
+        assertThat(deliveryPointDocument.get())
+                .returns("DELIVERY_POINT", DeliveryPointDocument::getName)
+                .returns(DeliveryPointType.BRANCH.getValue(), DeliveryPointDocument::getValue);
+    }
 
-  @Test
-  void should_retrieve_delivery_point() {
-    // given
-    mongoTemplate.save(DeliveryPointDocument.builder().name("DELIVERY_POINT").value(1).build());
+    @Test
+    void should_retrieve_delivery_point() {
+        // given
+        mongoTemplate.save(DeliveryPointDocument.builder().name("DELIVERY_POINT").value(1).build());
 
-    // when
-    Optional<DeliveryPoint> deliveryPoint = deliveryPointMongoAdapter.retrieveByValue(1);
+        // when
+        Optional<DeliveryPoint> deliveryPoint = deliveryPointMongoAdapter.retrieveByValue(1);
 
-    // then
-    assertThat(deliveryPoint).isPresent();
-    assertThat(deliveryPoint.get())
-        .returns("DELIVERY_POINT", DeliveryPoint::getName)
-        .returns(DeliveryPointType.BRANCH.getValue(), DeliveryPoint::getValue);
-  }
+        // then
+        assertThat(deliveryPoint).isPresent();
+        assertThat(deliveryPoint.get())
+                .returns("DELIVERY_POINT", DeliveryPoint::getName)
+                .returns(DeliveryPointType.BRANCH.getValue(), DeliveryPoint::getValue);
+    }
 }

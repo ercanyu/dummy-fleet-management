@@ -8,11 +8,11 @@ import javax.validation.constraints.Size;
 
 @Data
 public class VehicleCreateRequest {
-  @NotBlank
-  @Size(min = 5, max = 11)
-  private String licensePlate;
+    @NotBlank
+    @Size(min = 5, max = 11)
+    private String licensePlate;
 
-  public VehicleCreate toUseCase() {
-    return new VehicleCreate(licensePlate);
-  }
+    public VehicleCreate toUseCase() {
+        return new VehicleCreate(licensePlate);
+    }
 }

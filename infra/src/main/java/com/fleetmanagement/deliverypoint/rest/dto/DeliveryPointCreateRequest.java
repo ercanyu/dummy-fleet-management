@@ -10,14 +10,15 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class DeliveryPointCreateRequest {
-  @NotBlank private String name;
+    @NotBlank
+    private String name;
 
-  @NotNull
-  @Min(1)
-  @Max(3)
-  private Integer value;
+    @NotNull
+    @Min(1)
+    @Max(3)
+    private Integer value;
 
-  public DeliveryPointCreate toUseCase() {
-    return new DeliveryPointCreate(name, value);
-  }
+    public DeliveryPointCreate toUseCase() {
+        return new DeliveryPointCreate(name, value);
+    }
 }

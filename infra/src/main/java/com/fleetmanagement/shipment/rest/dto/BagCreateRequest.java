@@ -8,10 +8,12 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class BagCreateRequest {
-  @NotBlank private String barcode;
-  @NotNull private Integer deliveryPoint;
+    @NotBlank
+    private String barcode;
+    @NotNull
+    private Integer deliveryPoint;
 
-  public BagCreate toUseCase() {
-    return new BagCreate(barcode, deliveryPoint);
-  }
+    public BagCreate toUseCase() {
+        return new BagCreate(barcode, deliveryPoint);
+    }
 }

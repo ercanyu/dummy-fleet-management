@@ -7,13 +7,13 @@ import java.util.List;
 
 @Data
 public class DeliveryRequest {
-  private String plate;
-  private List<DeliveryStep> route;
+    private String plate;
+    private List<DeliveryStep> route;
 
-  public MakeDelivery toUseCase() {
-    return MakeDelivery.builder()
-        .licensePlate(plate)
-        .deliveryRoutes(route.stream().map(DeliveryStep::toDeliveryRoute).toList())
-        .build();
-  }
+    public MakeDelivery toUseCase() {
+        return MakeDelivery.builder()
+                .licensePlate(plate)
+                .deliveryRoutes(route.stream().map(DeliveryStep::toDeliveryRoute).toList())
+                .build();
+    }
 }

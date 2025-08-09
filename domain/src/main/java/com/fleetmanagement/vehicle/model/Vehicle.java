@@ -6,6 +6,6 @@ import lombok.Data;
 @Data
 @Builder
 public class Vehicle {
-  private String id;
-  private String licensePlate;
+    private String id;
+    private String licensePlate;
 }

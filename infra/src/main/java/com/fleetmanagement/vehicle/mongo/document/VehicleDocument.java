@@ -11,11 +11,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Builder
 public class VehicleDocument {
-  @Id private String id;
-  @Version private Long version;
-  private String licensePlate;
+    @Id
+    private String id;
+    @Version
+    private Long version;
+    private String licensePlate;
 
-  public Vehicle toModel() {
-    return Vehicle.builder().id(id).licensePlate(licensePlate).build();
-  }
+    public Vehicle toModel() {
+        return Vehicle.builder().id(id).licensePlate(licensePlate).build();
+    }
 }

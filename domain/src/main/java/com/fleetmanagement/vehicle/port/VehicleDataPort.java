@@ -6,7 +6,7 @@ import com.fleetmanagement.vehicle.usecase.command.VehicleCreate;
 import java.util.Optional;
 
 public interface VehicleDataPort {
-  Vehicle create(VehicleCreate vehicleCreate);
+    Vehicle create(VehicleCreate vehicleCreate);
 
-  Optional<Vehicle> retrieveByLicensePlate(String licensePlate);
+    Optional<Vehicle> retrieveByLicensePlate(String licensePlate);
 }

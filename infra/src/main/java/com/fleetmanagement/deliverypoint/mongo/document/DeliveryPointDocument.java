@@ -11,12 +11,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Builder
 public class DeliveryPointDocument {
-  @Id private String id;
-  @Version private Long version;
-  private String name;
-  private Integer value;
+    @Id
+    private String id;
+    @Version
+    private Long version;
+    private String name;
+    private Integer value;
 
-  public DeliveryPoint toModel() {
-    return DeliveryPoint.builder().id(id).name(name).value(value).build();
-  }
+    public DeliveryPoint toModel() {
+        return DeliveryPoint.builder().id(id).name(name).value(value).build();
+    }
 }

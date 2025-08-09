@@ -7,19 +7,19 @@ import java.util.List;
 
 @Data
 public class DeliveryRouteResponse {
-  private Integer deliveryPoint;
-  private List<DeliveryShipmentResponse> deliveries;
+    private Integer deliveryPoint;
+    private List<DeliveryShipmentResponse> deliveries;
 
-  public static DeliveryRouteResponse fromDeliveryRouteResult(
-      DeliveryRouteResult deliveryRouteResult) {
+    public static DeliveryRouteResponse fromDeliveryRouteResult(
+            DeliveryRouteResult deliveryRouteResult) {
 
-    DeliveryRouteResponse deliveryRouteResponse = new DeliveryRouteResponse();
-    deliveryRouteResponse.setDeliveryPoint(deliveryRouteResult.deliveryPoint());
-    deliveryRouteResponse.setDeliveries(
-        deliveryRouteResult.deliveryResults().stream()
-            .map(DeliveryShipmentResponse::fromShipmentDeliveryResult)
-            .toList());
+        DeliveryRouteResponse deliveryRouteResponse = new DeliveryRouteResponse();
+        deliveryRouteResponse.setDeliveryPoint(deliveryRouteResult.deliveryPoint());
+        deliveryRouteResponse.setDeliveries(
+                deliveryRouteResult.deliveryResults().stream()
+                        .map(DeliveryShipmentResponse::fromShipmentDeliveryResult)
+                        .toList());
 
-    return deliveryRouteResponse;
-  }
+        return deliveryRouteResponse;
+    }
 }

@@ -9,10 +9,12 @@ import java.util.List;
 
 @Data
 public class PackageLoadToBagRequest {
-  @NotNull private List<String> packageBarcodes;
-  @NotBlank private String bagBarcode;
+    @NotNull
+    private List<String> packageBarcodes;
+    @NotBlank
+    private String bagBarcode;
 
-  public PackageLoadToBag toUseCase() {
-    return new PackageLoadToBag(packageBarcodes, bagBarcode);
-  }
+    public PackageLoadToBag toUseCase() {
+        return new PackageLoadToBag(packageBarcodes, bagBarcode);
+    }
 }

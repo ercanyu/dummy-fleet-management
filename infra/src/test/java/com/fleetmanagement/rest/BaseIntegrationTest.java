@@ -16,16 +16,17 @@ import org.springframework.test.context.TestPropertySource;
 @TestPropertySource(properties = "spring.mongodb.embedded.version=3.5.5")
 @AutoConfigureDataMongo
 public class BaseIntegrationTest {
-  protected @Autowired TestRestTemplate testRestTemplate;
-  protected @Autowired MongoTemplate mongoTemplate;
-  protected ParameterizedTypeReference<ApiResponse<ErrorResponse>> errorTypeReference =
-      new ParameterizedTypeReference<>() {};
+    protected @Autowired TestRestTemplate testRestTemplate;
+    protected @Autowired MongoTemplate mongoTemplate;
+    protected ParameterizedTypeReference<ApiResponse<ErrorResponse>> errorTypeReference =
+            new ParameterizedTypeReference<>() {
+            };
 
-  @AfterEach
-  void setUp() {
-    mongoTemplate.remove(new Query(), "vehicles");
-    mongoTemplate.remove(new Query(), "delivery_points");
-    mongoTemplate.remove(new Query(), "delivery_errors");
-    mongoTemplate.remove(new Query(), "shipments");
-  }
+    @AfterEach
+    void setUp() {
+        mongoTemplate.remove(new Query(), "vehicles");
+        mongoTemplate.remove(new Query(), "delivery_points");
+        mongoTemplate.remove(new Query(), "delivery_errors");
+        mongoTemplate.remove(new Query(), "shipments");
+    }
 }

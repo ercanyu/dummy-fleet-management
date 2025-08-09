@@ -17,52 +17,53 @@ import org.springframework.http.ResponseEntity;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DeliveryPointControllerIntegrationTest extends BaseIntegrationTest {
-  ParameterizedTypeReference<ApiResponse<DeliveryPointResponse>> deliveryPointTypeReference =
-      new ParameterizedTypeReference<>() {};
+    ParameterizedTypeReference<ApiResponse<DeliveryPointResponse>> deliveryPointTypeReference =
+            new ParameterizedTypeReference<>() {
+            };
 
-  @Test
-  void should_create_delivery_point() {
-    // given
-    DeliveryPointCreateRequest request = new DeliveryPointCreateRequest();
-    request.setName("DELIVERY_POINT");
-    request.setValue(DeliveryPointType.BRANCH.getValue());
+    @Test
+    void should_create_delivery_point() {
+        // given
+        DeliveryPointCreateRequest request = new DeliveryPointCreateRequest();
+        request.setName("DELIVERY_POINT");
+        request.setValue(DeliveryPointType.BRANCH.getValue());
 
-    // when
-    ResponseEntity<ApiResponse<DeliveryPointResponse>> response =
-        testRestTemplate.exchange(
-            "/api/delivery-points",
-            HttpMethod.POST,
-            new HttpEntity<>(request),
-            deliveryPointTypeReference);
+        // when
+        ResponseEntity<ApiResponse<DeliveryPointResponse>> response =
+                testRestTemplate.exchange(
+                        "/api/delivery-points",
+                        HttpMethod.POST,
+                        new HttpEntity<>(request),
+                        deliveryPointTypeReference);
 
-    // then
-    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-    assertThat(response.getBody()).isNotNull();
-    assertThat(response.getBody().data())
-        .isNotNull()
-        .returns("DELIVERY_POINT", DeliveryPointResponse::getName)
-        .returns(DeliveryPointType.BRANCH.getValue(), DeliveryPointResponse::getValue);
-  }
+        // then
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(response.getBody()).isNotNull();
+        assertThat(response.getBody().data())
+                .isNotNull()
+                .returns("DELIVERY_POINT", DeliveryPointResponse::getName)
+                .returns(DeliveryPointType.BRANCH.getValue(), DeliveryPointResponse::getValue);
+    }
 
-  @Test
-  void should_return_error_when_delivery_point_exists() {
-    // given
-    DeliveryPointCreateRequest request = new DeliveryPointCreateRequest();
-    request.setName("DELIVERY_POINT");
-    request.setValue(DeliveryPointType.BRANCH.getValue());
-    mongoTemplate.save(DeliveryPointDocument.builder().name("DELIVERY_POINT").value(1).build());
+    @Test
+    void should_return_error_when_delivery_point_exists() {
+        // given
+        DeliveryPointCreateRequest request = new DeliveryPointCreateRequest();
+        request.setName("DELIVERY_POINT");
+        request.setValue(DeliveryPointType.BRANCH.getValue());
+        mongoTemplate.save(DeliveryPointDocument.builder().name("DELIVERY_POINT").value(1).build());
 
-    // when
-    ResponseEntity<ApiResponse<ErrorResponse>> errorResponse =
-        testRestTemplate.exchange(
-            "/api/delivery-points", HttpMethod.POST, new HttpEntity<>(request), errorTypeReference);
+        // when
+        ResponseEntity<ApiResponse<ErrorResponse>> errorResponse =
+                testRestTemplate.exchange(
+                        "/api/delivery-points", HttpMethod.POST, new HttpEntity<>(request), errorTypeReference);
 
-    // then
-    assertThat(errorResponse.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
-    assertThat(errorResponse.getBody()).isNotNull();
-    assertThat(errorResponse.getBody().data())
-        .isNotNull()
-        .returns("99", ErrorResponse::errorCode)
-        .returns("Delivery Point already exists.", ErrorResponse::errorDescription);
-  }
+        // then
+        assertThat(errorResponse.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+        assertThat(errorResponse.getBody()).isNotNull();
+        assertThat(errorResponse.getBody().data())
+                .isNotNull()
+                .returns("99", ErrorResponse::errorCode)
+                .returns("Delivery Point already exists.", ErrorResponse::errorDescription);
+    }
 }

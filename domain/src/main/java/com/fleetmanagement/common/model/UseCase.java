@@ -1,3 +1,4 @@
 package com.fleetmanagement.common.model;
 
-public interface UseCase {}
+public interface UseCase {
+}

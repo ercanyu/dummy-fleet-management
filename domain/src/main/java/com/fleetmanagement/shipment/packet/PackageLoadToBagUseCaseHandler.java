@@ -16,17 +16,17 @@ import java.util.List;
 @RequiredArgsConstructor
 @DomainComponent
 public class PackageLoadToBagUseCaseHandler
-    implements UseCaseHandler<List<Package>, PackageLoadToBag> {
-  private final PackageDataPort packageDataPort;
-  private final BagDataPort bagDataPort;
+        implements UseCaseHandler<List<Package>, PackageLoadToBag> {
+    private final PackageDataPort packageDataPort;
+    private final BagDataPort bagDataPort;
 
-  @Override
-  public List<Package> handle(PackageLoadToBag useCase) {
-    Bag bag =
-        bagDataPort
-            .retrieveByBarcode(useCase.bagBarcode())
-            .orElseThrow(() -> new FleetManagementApiException(ExceptionMessage.BAG_NOT_FOUND));
+    @Override
+    public List<Package> handle(PackageLoadToBag useCase) {
+        Bag bag =
+                bagDataPort
+                        .retrieveByBarcode(useCase.bagBarcode())
+                        .orElseThrow(() -> new FleetManagementApiException(ExceptionMessage.BAG_NOT_FOUND));
 
-    return packageDataPort.loadPackagesToBag(useCase.packageBarcodes(), bag.getId());
-  }
+        return packageDataPort.loadPackagesToBag(useCase.packageBarcodes(), bag.getId());
+    }
 }

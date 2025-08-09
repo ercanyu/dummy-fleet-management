@@ -15,33 +15,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class VehicleMongoAdapterIntegrationTest extends BaseIntegrationTest {
 
-  @Autowired VehicleMongoAdapter vehicleMongoAdapter;
-  @Autowired VehicleMongoRepository vehicleMongoRepository;
+    @Autowired
+    VehicleMongoAdapter vehicleMongoAdapter;
+    @Autowired
+    VehicleMongoRepository vehicleMongoRepository;
 
-  @Test
-  void should_create_vehicle() {
-    // given
-    VehicleCreate vehicleCreate = new VehicleCreate("34 EY 34");
+    @Test
+    void should_create_vehicle() {
+        // given
+        VehicleCreate vehicleCreate = new VehicleCreate("34 EY 34");
 
-    // when
-    Vehicle vehicle = vehicleMongoAdapter.create(vehicleCreate);
+        // when
+        Vehicle vehicle = vehicleMongoAdapter.create(vehicleCreate);
 
-    // then
-    Optional<VehicleDocument> vehicleDocument = vehicleMongoRepository.findById(vehicle.getId());
-    assertThat(vehicleDocument).isPresent();
-    assertThat(vehicleDocument.get().getLicensePlate()).isEqualTo("34 EY 34");
-  }
+        // then
+        Optional<VehicleDocument> vehicleDocument = vehicleMongoRepository.findById(vehicle.getId());
+        assertThat(vehicleDocument).isPresent();
+        assertThat(vehicleDocument.get().getLicensePlate()).isEqualTo("34 EY 34");
+    }
 
-  @Test
-  void should_retrieve_vehicle() {
-    // given
-    mongoTemplate.save(VehicleDocument.builder().licensePlate("34 EY 34").build());
+    @Test
+    void should_retrieve_vehicle() {
+        // given
+        mongoTemplate.save(VehicleDocument.builder().licensePlate("34 EY 34").build());
 
-    // when
-    Optional<Vehicle> vehicle = vehicleMongoAdapter.retrieveByLicensePlate("34 EY 34");
+        // when
+        Optional<Vehicle> vehicle = vehicleMongoAdapter.retrieveByLicensePlate("34 EY 34");
 
-    // then
-    assertThat(vehicle).isPresent();
-    assertThat(vehicle.get().getLicensePlate()).isEqualTo("34 EY 34");
-  }
+        // then
+        assertThat(vehicle).isPresent();
+        assertThat(vehicle.get().getLicensePlate()).isEqualTo("34 EY 34");
+    }
 }

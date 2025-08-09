@@ -8,6 +8,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 public class DeliveryRoute {
-  private Integer deliveryPoint;
-  private List<String> shipmentBarcodes;
+    private Integer deliveryPoint;
+    private List<String> shipmentBarcodes;
 }

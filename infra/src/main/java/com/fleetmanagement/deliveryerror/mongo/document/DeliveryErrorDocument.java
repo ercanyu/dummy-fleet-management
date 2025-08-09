@@ -12,17 +12,18 @@ import java.time.LocalDateTime;
 @Builder
 @Data
 public class DeliveryErrorDocument {
-  @Id private String id;
-  private String shipmentBarcode;
-  private String message;
-  private LocalDateTime errorDate;
+    @Id
+    private String id;
+    private String shipmentBarcode;
+    private String message;
+    private LocalDateTime errorDate;
 
-  public DeliveryError toModel() {
-    return DeliveryError.builder()
-        .id(id)
-        .shipmentBarcode(shipmentBarcode)
-        .message(message)
-        .errorDate(errorDate)
-        .build();
-  }
+    public DeliveryError toModel() {
+        return DeliveryError.builder()
+                .id(id)
+                .shipmentBarcode(shipmentBarcode)
+                .message(message)
+                .errorDate(errorDate)
+                .build();
+    }
 }

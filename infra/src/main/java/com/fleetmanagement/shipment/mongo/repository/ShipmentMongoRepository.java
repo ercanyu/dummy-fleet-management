@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ShipmentMongoRepository extends MongoRepository<ShipmentDocument, String> {
-  List<ShipmentDocument> findByBagId(String bagId);
+    List<ShipmentDocument> findByBagId(String bagId);
 
-  List<ShipmentDocument> findByBarcodeIn(List<String> barcodes);
+    List<ShipmentDocument> findByBarcodeIn(List<String> barcodes);
 
-  List<ShipmentDocument> findByIdIn(List<String> ids);
+    List<ShipmentDocument> findByIdIn(List<String> ids);
 
-  Optional<ShipmentDocument> findByBarcode(String barcode);
+    Optional<ShipmentDocument> findByBarcode(String barcode);
 }

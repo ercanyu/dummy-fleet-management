@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/deliveries")
 public class DeliveryController extends BaseController {
-  private final UseCaseHandler<DeliveryResult, MakeDelivery> makeDeliveryUseCaseHandler;
+    private final UseCaseHandler<DeliveryResult, MakeDelivery> makeDeliveryUseCaseHandler;
 
-  @PutMapping
-  public DeliveryResponse deliver(@RequestBody DeliveryRequest request) {
-    DeliveryResult deliveryResult = makeDeliveryUseCaseHandler.handle(request.toUseCase());
-    log.info("DeliveryResult {} is created for request {}", deliveryResult, request);
-    return DeliveryResponse.fromModel(deliveryResult);
-  }
+    @PutMapping
+    public DeliveryResponse deliver(@RequestBody DeliveryRequest request) {
+        DeliveryResult deliveryResult = makeDeliveryUseCaseHandler.handle(request.toUseCase());
+        log.info("DeliveryResult {} is created for request {}", deliveryResult, request);
+        return DeliveryResponse.fromModel(deliveryResult);
+    }
 }

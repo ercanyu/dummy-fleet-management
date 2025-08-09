@@ -11,12 +11,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Builder
 public class ShipmentDocument {
-  @Id private String id;
-  @Version private Long version;
-  private String barcode;
-  private Integer deliveryPoint;
-  private Integer status;
-  private Integer volumetricWeight;
-  private String bagId;
-  private ShipmentType shipmentType;
+    @Id
+    private String id;
+    @Version
+    private Long version;
+    private String barcode;
+    private Integer deliveryPoint;
+    private Integer status;
+    private Integer volumetricWeight;
+    private String bagId;
+    private ShipmentType shipmentType;
 }

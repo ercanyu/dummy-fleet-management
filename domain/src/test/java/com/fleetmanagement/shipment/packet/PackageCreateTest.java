@@ -16,43 +16,43 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class PackageCreateTest {
-  PackageCreateUseCaseHandler packageCreateUseCaseHandler;
+    PackageCreateUseCaseHandler packageCreateUseCaseHandler;
 
-  @BeforeEach
-  void setUp() {
-    packageCreateUseCaseHandler =
-        new PackageCreateUseCaseHandler(
-            new PackageFakeDataAdapter(), new DeliveryPointFakeDataAdapter());
-  }
+    @BeforeEach
+    void setUp() {
+        packageCreateUseCaseHandler =
+                new PackageCreateUseCaseHandler(
+                        new PackageFakeDataAdapter(), new DeliveryPointFakeDataAdapter());
+    }
 
-  @Test
-  void should_create_package() {
-    // given
-    PackageCreate packageCreate =
-        new PackageCreate("PACKET_BARCODE", DeliveryPointType.DISTRIBUTION_CENTER.getValue(), 5);
+    @Test
+    void should_create_package() {
+        // given
+        PackageCreate packageCreate =
+                new PackageCreate("PACKET_BARCODE", DeliveryPointType.DISTRIBUTION_CENTER.getValue(), 5);
 
-    // when
-    Package pkg = packageCreateUseCaseHandler.handle(packageCreate);
+        // when
+        Package pkg = packageCreateUseCaseHandler.handle(packageCreate);
 
-    // then
-    assertThat(pkg)
-        .isNotNull()
-        .returns("1", Shipment::getId)
-        .returns("PACKET_BARCODE", Shipment::getBarcode)
-        .returns(PackageStatus.CREATED, Package::getPackageStatus)
-        .returns(ShipmentType.PACKAGE, Package::getShipmentType)
-        .returns(DeliveryPointType.DISTRIBUTION_CENTER.getValue(), Shipment::getDeliveryPoint)
-        .returns(5, Package::getVolumetricWeight);
-  }
+        // then
+        assertThat(pkg)
+                .isNotNull()
+                .returns("1", Shipment::getId)
+                .returns("PACKET_BARCODE", Shipment::getBarcode)
+                .returns(PackageStatus.CREATED, Package::getPackageStatus)
+                .returns(ShipmentType.PACKAGE, Package::getShipmentType)
+                .returns(DeliveryPointType.DISTRIBUTION_CENTER.getValue(), Shipment::getDeliveryPoint)
+                .returns(5, Package::getVolumetricWeight);
+    }
 
-  @Test
-  void should_throw_exception_when_delivery_point_not_exists() {
-    // given
-    PackageCreate packageCreate = new PackageCreate("PACKET_BARCODE", 54, 5);
+    @Test
+    void should_throw_exception_when_delivery_point_not_exists() {
+        // given
+        PackageCreate packageCreate = new PackageCreate("PACKET_BARCODE", 54, 5);
 
-    // when
-    assertThatExceptionOfType(FleetManagementApiException.class)
-        .isThrownBy(() -> packageCreateUseCaseHandler.handle(packageCreate))
-        .withMessage("Delivery Point doesn't exist.");
-  }
+        // when
+        assertThatExceptionOfType(FleetManagementApiException.class)
+                .isThrownBy(() -> packageCreateUseCaseHandler.handle(packageCreate))
+                .withMessage("Delivery Point doesn't exist.");
+    }
 }

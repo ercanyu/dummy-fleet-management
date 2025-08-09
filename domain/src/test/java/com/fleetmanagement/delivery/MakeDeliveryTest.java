@@ -22,71 +22,71 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 public class MakeDeliveryTest {
-  MakeDeliveryUseCaseHandler makeDeliveryUseCaseHandler;
+    MakeDeliveryUseCaseHandler makeDeliveryUseCaseHandler;
 
-  @BeforeEach
-  void setUp() {
-    VehicleFakeDataAdapter vehicleFakeDataAdapter = new VehicleFakeDataAdapter();
-    ShipmentFakeDataAdapter shipmentFakeDataAdapter = new ShipmentFakeDataAdapter();
-    PackageFakeDataAdapter packageFakeDataAdapter = new PackageFakeDataAdapter();
-    DeliveryErrorFakeDataAdapter deliveryErrorFakeDataAdapter = new DeliveryErrorFakeDataAdapter();
+    @BeforeEach
+    void setUp() {
+        VehicleFakeDataAdapter vehicleFakeDataAdapter = new VehicleFakeDataAdapter();
+        ShipmentFakeDataAdapter shipmentFakeDataAdapter = new ShipmentFakeDataAdapter();
+        PackageFakeDataAdapter packageFakeDataAdapter = new PackageFakeDataAdapter();
+        DeliveryErrorFakeDataAdapter deliveryErrorFakeDataAdapter = new DeliveryErrorFakeDataAdapter();
 
-    BagStrategy bagStrategy =
-        new BagStrategy(
-            packageFakeDataAdapter, shipmentFakeDataAdapter, deliveryErrorFakeDataAdapter);
+        BagStrategy bagStrategy =
+                new BagStrategy(
+                        packageFakeDataAdapter, shipmentFakeDataAdapter, deliveryErrorFakeDataAdapter);
 
-    PackageStrategy packageStrategy =
-        new PackageStrategy(
-            shipmentFakeDataAdapter, packageFakeDataAdapter, deliveryErrorFakeDataAdapter);
+        PackageStrategy packageStrategy =
+                new PackageStrategy(
+                        shipmentFakeDataAdapter, packageFakeDataAdapter, deliveryErrorFakeDataAdapter);
 
-    makeDeliveryUseCaseHandler =
-        new MakeDeliveryUseCaseHandler(
-            vehicleFakeDataAdapter,
-            shipmentFakeDataAdapter,
-            new ShipmentStrategyRegistry(bagStrategy, packageStrategy));
-  }
+        makeDeliveryUseCaseHandler =
+                new MakeDeliveryUseCaseHandler(
+                        vehicleFakeDataAdapter,
+                        shipmentFakeDataAdapter,
+                        new ShipmentStrategyRegistry(bagStrategy, packageStrategy));
+    }
 
-  @Test
-  void should_throw_exception_when_vehicle_not_exists() {
-    // given
-    MakeDelivery makeDelivery =
-        MakeDelivery.builder().licensePlate("NOT_EXISTING_LICENSE_PLATE").build();
+    @Test
+    void should_throw_exception_when_vehicle_not_exists() {
+        // given
+        MakeDelivery makeDelivery =
+                MakeDelivery.builder().licensePlate("NOT_EXISTING_LICENSE_PLATE").build();
 
-    // when
-    assertThatExceptionOfType(FleetManagementApiException.class)
-        .isThrownBy(() -> makeDeliveryUseCaseHandler.handle(makeDelivery))
-        .withMessage("Vehicle doesn't exist.");
-  }
+        // when
+        assertThatExceptionOfType(FleetManagementApiException.class)
+                .isThrownBy(() -> makeDeliveryUseCaseHandler.handle(makeDelivery))
+                .withMessage("Vehicle doesn't exist.");
+    }
 
-  @Test
-  void should_unload_package_at_branch() {
-    // given
-    MakeDelivery makeDelivery =
-        MakeDelivery.builder()
-            .licensePlate("EXISTING_LICENSE_PLATE")
-            .deliveryRoutes(
-                List.of(
-                    new DeliveryRoute(
-                        DeliveryPointType.BRANCH.getValue(), List.of("PACKAGE_BARCODE1"))))
-            .build();
+    @Test
+    void should_unload_package_at_branch() {
+        // given
+        MakeDelivery makeDelivery =
+                MakeDelivery.builder()
+                        .licensePlate("EXISTING_LICENSE_PLATE")
+                        .deliveryRoutes(
+                                List.of(
+                                        new DeliveryRoute(
+                                                DeliveryPointType.BRANCH.getValue(), List.of("PACKAGE_BARCODE1"))))
+                        .build();
 
-    // when
-    DeliveryResult deliveryResult = makeDeliveryUseCaseHandler.handle(makeDelivery);
+        // when
+        DeliveryResult deliveryResult = makeDeliveryUseCaseHandler.handle(makeDelivery);
 
-    // then
-    assertThat(deliveryResult)
-        .isNotNull()
-        .returns("EXISTING_LICENSE_PLATE", DeliveryResult::licensePlate);
+        // then
+        assertThat(deliveryResult)
+                .isNotNull()
+                .returns("EXISTING_LICENSE_PLATE", DeliveryResult::licensePlate);
 
-    assertThat(deliveryResult.shipmentDeliveryResults())
-        .isNotNull()
-        .hasSize(1)
-        .extracting("deliveryPoint", "deliveryResults")
-        .containsExactlyInAnyOrder(
-            tuple(
-                DeliveryPointType.BRANCH.getValue(),
-                List.of(
-                    new ShipmentDeliveryResult(
-                        "PACKAGE_BARCODE1", PackageStatus.UNLOADED.getValue()))));
-  }
+        assertThat(deliveryResult.shipmentDeliveryResults())
+                .isNotNull()
+                .hasSize(1)
+                .extracting("deliveryPoint", "deliveryResults")
+                .containsExactlyInAnyOrder(
+                        tuple(
+                                DeliveryPointType.BRANCH.getValue(),
+                                List.of(
+                                        new ShipmentDeliveryResult(
+                                                "PACKAGE_BARCODE1", PackageStatus.UNLOADED.getValue()))));
+    }
 }

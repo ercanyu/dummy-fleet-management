@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 public class DeliveryError {
-  private String id;
-  private String shipmentBarcode;
-  private String message;
-  private LocalDateTime errorDate;
+    private String id;
+    private String shipmentBarcode;
+    private String message;
+    private LocalDateTime errorDate;
 }

@@ -8,13 +8,13 @@ import org.springframework.context.annotation.FilterType;
 
 @SpringBootApplication
 @ComponentScan(
-    includeFilters = {
-      @ComponentScan.Filter(
-          type = FilterType.ANNOTATION,
-          value = {DomainComponent.class})
-    })
+        includeFilters = {
+                @ComponentScan.Filter(
+                        type = FilterType.ANNOTATION,
+                        value = {DomainComponent.class})
+        })
 public class FleetManagementApplication {
-  public static void main(String[] args) {
-    SpringApplication.run(FleetManagementApplication.class, args);
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(FleetManagementApplication.class, args);
+    }
 }

@@ -10,15 +10,17 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class PackageCreateRequest {
-  @NotBlank private String barcode;
-  @NotNull private Integer deliveryPoint;
+    @NotBlank
+    private String barcode;
+    @NotNull
+    private Integer deliveryPoint;
 
-  @NotNull
-  @Min(0)
-  @Max(Integer.MAX_VALUE)
-  private Integer volumetricWeight;
+    @NotNull
+    @Min(0)
+    @Max(Integer.MAX_VALUE)
+    private Integer volumetricWeight;
 
-  public PackageCreate toUseCase() {
-    return new PackageCreate(barcode, deliveryPoint, volumetricWeight);
-  }
+    public PackageCreate toUseCase() {
+        return new PackageCreate(barcode, deliveryPoint, volumetricWeight);
+    }
 }

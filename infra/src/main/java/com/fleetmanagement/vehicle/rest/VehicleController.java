@@ -19,13 +19,13 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RequestMapping("/api/vehicles")
 public class VehicleController extends BaseController {
-  private final UseCaseHandler<Vehicle, VehicleCreate> createHandler;
+    private final UseCaseHandler<Vehicle, VehicleCreate> createHandler;
 
-  @PostMapping
-  @ResponseStatus(HttpStatus.CREATED)
-  public ApiResponse<VehicleResponse> create(@Valid @RequestBody VehicleCreateRequest request) {
-    Vehicle vehicle = createHandler.handle(request.toUseCase());
-    log.info("Vehicle {} is created for request {}", vehicle, request);
-    return respond(VehicleResponse.fromModel(vehicle));
-  }
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public ApiResponse<VehicleResponse> create(@Valid @RequestBody VehicleCreateRequest request) {
+        Vehicle vehicle = createHandler.handle(request.toUseCase());
+        log.info("Vehicle {} is created for request {}", vehicle, request);
+        return respond(VehicleResponse.fromModel(vehicle));
+    }
 }

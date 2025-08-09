@@ -6,9 +6,9 @@ import com.fleetmanagement.shipment.packet.usecase.command.PackageCreate;
 import java.util.List;
 
 public interface PackageDataPort {
-  Package create(PackageCreate packageCreate);
+    Package create(PackageCreate packageCreate);
 
-  List<Package> retrieveByBagId(String bagId);
+    List<Package> retrieveByBagId(String bagId);
 
-  List<Package> loadPackagesToBag(List<String> packageBarcodes, String bagId);
+    List<Package> loadPackagesToBag(List<String> packageBarcodes, String bagId);
 }

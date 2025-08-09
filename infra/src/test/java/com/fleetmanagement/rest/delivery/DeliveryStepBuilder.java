@@ -7,18 +7,18 @@ import java.util.List;
 
 public class DeliveryStepBuilder {
 
-  public static DeliveryStep from(Integer deliveryPoint, List<String> barcodes) {
-    List<Barcode> barcodeList = barcodes.stream().map(DeliveryStepBuilder::createBarcode).toList();
-    DeliveryStep deliveryStep = new DeliveryStep();
-    deliveryStep.setDeliveryPoint(deliveryPoint);
-    deliveryStep.setDeliveries(barcodeList);
+    public static DeliveryStep from(Integer deliveryPoint, List<String> barcodes) {
+        List<Barcode> barcodeList = barcodes.stream().map(DeliveryStepBuilder::createBarcode).toList();
+        DeliveryStep deliveryStep = new DeliveryStep();
+        deliveryStep.setDeliveryPoint(deliveryPoint);
+        deliveryStep.setDeliveries(barcodeList);
 
-    return deliveryStep;
-  }
+        return deliveryStep;
+    }
 
-  private static Barcode createBarcode(String barcodeStr) {
-    Barcode barcode = new Barcode();
-    barcode.setBarcode(barcodeStr);
-    return barcode;
-  }
+    private static Barcode createBarcode(String barcodeStr) {
+        Barcode barcode = new Barcode();
+        barcode.setBarcode(barcodeStr);
+        return barcode;
+    }
 }

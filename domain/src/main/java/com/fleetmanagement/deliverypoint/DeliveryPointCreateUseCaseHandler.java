@@ -14,16 +14,16 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 @DomainComponent
 public class DeliveryPointCreateUseCaseHandler
-    implements UseCaseHandler<DeliveryPoint, DeliveryPointCreate> {
-  private final DeliveryPointDataPort deliveryPointDataPort;
+        implements UseCaseHandler<DeliveryPoint, DeliveryPointCreate> {
+    private final DeliveryPointDataPort deliveryPointDataPort;
 
-  @Override
-  public DeliveryPoint handle(DeliveryPointCreate useCase) {
-    if (deliveryPointDataPort.retrieveByValue(useCase.value()).isPresent()) {
-      log.warn("Delivery Point {} already exists!", useCase.value());
-      throw new FleetManagementApiException(ExceptionMessage.DELIVERY_POINT_ALREADY_EXISTS);
+    @Override
+    public DeliveryPoint handle(DeliveryPointCreate useCase) {
+        if (deliveryPointDataPort.retrieveByValue(useCase.value()).isPresent()) {
+            log.warn("Delivery Point {} already exists!", useCase.value());
+            throw new FleetManagementApiException(ExceptionMessage.DELIVERY_POINT_ALREADY_EXISTS);
+        }
+
+        return deliveryPointDataPort.create(useCase);
     }
-
-    return deliveryPointDataPort.create(useCase);
-  }
 }

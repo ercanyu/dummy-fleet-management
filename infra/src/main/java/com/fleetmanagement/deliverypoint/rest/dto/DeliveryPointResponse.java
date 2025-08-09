@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeliveryPointResponse {
-  private String id;
-  private String name;
-  private Integer value;
+    private String id;
+    private String name;
+    private Integer value;
 
-  public static DeliveryPointResponse fromModel(DeliveryPoint deliveryPoint) {
-    return DeliveryPointResponse.builder()
-        .id(deliveryPoint.getId())
-        .name(deliveryPoint.getName())
-        .value(deliveryPoint.getValue())
-        .build();
-  }
+    public static DeliveryPointResponse fromModel(DeliveryPoint deliveryPoint) {
+        return DeliveryPointResponse.builder()
+                .id(deliveryPoint.getId())
+                .name(deliveryPoint.getName())
+                .value(deliveryPoint.getValue())
+                .build();
+    }
 }

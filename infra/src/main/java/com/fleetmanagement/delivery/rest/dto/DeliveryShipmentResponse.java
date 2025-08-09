@@ -7,12 +7,12 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class DeliveryShipmentResponse {
-  private String barcode;
-  private Integer state;
+    private String barcode;
+    private Integer state;
 
-  public static DeliveryShipmentResponse fromShipmentDeliveryResult(
-      ShipmentDeliveryResult shipmentDeliveryResult) {
-    return new DeliveryShipmentResponse(
-        shipmentDeliveryResult.barcode(), shipmentDeliveryResult.status());
-  }
+    public static DeliveryShipmentResponse fromShipmentDeliveryResult(
+            ShipmentDeliveryResult shipmentDeliveryResult) {
+        return new DeliveryShipmentResponse(
+                shipmentDeliveryResult.barcode(), shipmentDeliveryResult.status());
+    }
 }

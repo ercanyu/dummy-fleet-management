@@ -6,7 +6,7 @@ import com.fleetmanagement.shipment.bag.usecase.command.BagCreate;
 import java.util.Optional;
 
 public interface BagDataPort {
-  Bag create(BagCreate bagCreate);
+    Bag create(BagCreate bagCreate);
 
-  Optional<Bag> retrieveByBarcode(String barcode);
+    Optional<Bag> retrieveByBarcode(String barcode);
 }

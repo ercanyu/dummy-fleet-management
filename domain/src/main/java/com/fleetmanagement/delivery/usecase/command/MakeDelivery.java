@@ -10,6 +10,6 @@ import java.util.List;
 @Data
 @Builder
 public class MakeDelivery implements UseCase {
-  private String licensePlate;
-  private List<DeliveryRoute> deliveryRoutes;
+    private String licensePlate;
+    private List<DeliveryRoute> deliveryRoutes;
 }

@@ -13,16 +13,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @DomainComponent
 public class BagCreateUseCaseHandler implements UseCaseHandler<Bag, BagCreate> {
-  private final BagDataPort bagDataPort;
-  private final DeliveryPointDataPort deliveryPointDataPort;
+    private final BagDataPort bagDataPort;
+    private final DeliveryPointDataPort deliveryPointDataPort;
 
-  @Override
-  public Bag handle(BagCreate useCase) {
-    deliveryPointDataPort
-        .retrieveByValue(useCase.deliveryPoint())
-        .orElseThrow(
-            () -> new FleetManagementApiException(ExceptionMessage.DELIVERY_POINT_NOT_FOUND));
+    @Override
+    public Bag handle(BagCreate useCase) {
+        deliveryPointDataPort
+                .retrieveByValue(useCase.deliveryPoint())
+                .orElseThrow(
+                        () -> new FleetManagementApiException(ExceptionMessage.DELIVERY_POINT_NOT_FOUND));
 
-    return bagDataPort.create(useCase);
-  }
+        return bagDataPort.create(useCase);
+    }
 }

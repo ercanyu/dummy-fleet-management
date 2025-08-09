@@ -8,16 +8,16 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 @Getter
 public enum BagStatus {
-  CREATED(1),
-  LOADED(3),
-  UNLOADED(4);
+    CREATED(1),
+    LOADED(3),
+    UNLOADED(4);
 
-  private final Integer value;
+    private final Integer value;
 
-  public static BagStatus of(Integer status) {
-    return Stream.of(BagStatus.values())
-        .filter(bagStatus -> bagStatus.value.equals(status))
-        .findFirst()
-        .orElseThrow();
-  }
+    public static BagStatus of(Integer status) {
+        return Stream.of(BagStatus.values())
+                .filter(bagStatus -> bagStatus.value.equals(status))
+                .findFirst()
+                .orElseThrow();
+    }
 }

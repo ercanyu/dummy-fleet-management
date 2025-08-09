@@ -4,7 +4,7 @@ import com.fleetmanagement.shipment.model.Shipment;
 import com.fleetmanagement.shipment.model.ShipmentUnloadResult;
 
 public interface ShipmentStrategy {
-  void loadShipment(Shipment shipment);
+    void loadShipment(Shipment shipment);
 
-  ShipmentUnloadResult unloadShipment(Shipment shipment, Integer deliveryPoint);
+    ShipmentUnloadResult unloadShipment(Shipment shipment, Integer deliveryPoint);
 }

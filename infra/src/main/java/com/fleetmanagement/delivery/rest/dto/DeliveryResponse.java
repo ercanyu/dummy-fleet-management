@@ -11,17 +11,17 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeliveryResponse {
-  private String plate;
-  private List<DeliveryRouteResponse> route;
+    private String plate;
+    private List<DeliveryRouteResponse> route;
 
-  public static DeliveryResponse fromModel(DeliveryResult deliveryResult) {
-    DeliveryResponse deliveryResponse = new DeliveryResponse();
-    deliveryResponse.setPlate(deliveryResult.licensePlate());
-    deliveryResponse.setRoute(
-        deliveryResult.shipmentDeliveryResults().stream()
-            .map(DeliveryRouteResponse::fromDeliveryRouteResult)
-            .toList());
+    public static DeliveryResponse fromModel(DeliveryResult deliveryResult) {
+        DeliveryResponse deliveryResponse = new DeliveryResponse();
+        deliveryResponse.setPlate(deliveryResult.licensePlate());
+        deliveryResponse.setRoute(
+                deliveryResult.shipmentDeliveryResults().stream()
+                        .map(DeliveryRouteResponse::fromDeliveryRouteResult)
+                        .toList());
 
-    return deliveryResponse;
-  }
+        return deliveryResponse;
+    }
 }

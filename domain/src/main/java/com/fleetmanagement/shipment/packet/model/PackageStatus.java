@@ -8,17 +8,17 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 @Getter
 public enum PackageStatus {
-  CREATED(1),
-  LOADED_INTO_BAG(2),
-  LOADED(3),
-  UNLOADED(4);
+    CREATED(1),
+    LOADED_INTO_BAG(2),
+    LOADED(3),
+    UNLOADED(4);
 
-  private final Integer value;
+    private final Integer value;
 
-  public static PackageStatus of(Integer status) {
-    return Stream.of(PackageStatus.values())
-        .filter(packageStatus -> packageStatus.value.equals(status))
-        .findFirst()
-        .orElseThrow();
-  }
+    public static PackageStatus of(Integer status) {
+        return Stream.of(PackageStatus.values())
+                .filter(packageStatus -> packageStatus.value.equals(status))
+                .findFirst()
+                .orElseThrow();
+    }
 }

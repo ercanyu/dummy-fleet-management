@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Optional;
 
 public interface DeliveryPointMongoRepository
-    extends MongoRepository<DeliveryPointDocument, String> {
-  Optional<DeliveryPointDocument> findByValue(Integer value);
+        extends MongoRepository<DeliveryPointDocument, String> {
+    Optional<DeliveryPointDocument> findByValue(Integer value);
 }
