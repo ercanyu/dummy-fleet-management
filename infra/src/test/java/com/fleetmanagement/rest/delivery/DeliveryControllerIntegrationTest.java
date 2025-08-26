@@ -79,7 +79,7 @@ public class DeliveryControllerIntegrationTest extends BaseShipmentIntegrationTe
         // when
         ResponseEntity<ApiResponse<ErrorResponse>> errorResponse =
                 testRestTemplate.exchange(
-                        "/api/deliveries", HttpMethod.PUT, new HttpEntity<>(request), errorTypeReference);
+                        "/api/deliveries", HttpMethod.POST, new HttpEntity<>(request), errorTypeReference);
 
         // then
         assertThat(errorResponse.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
