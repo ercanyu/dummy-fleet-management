@@ -45,7 +45,7 @@ public class DeliveryControllerIntegrationTest extends BaseShipmentIntegrationTe
         ResponseEntity<DeliveryResponse> response =
                 testRestTemplate.exchange(
                         "/api/deliveries",
-                        HttpMethod.PUT,
+                        HttpMethod.POST,
                         new HttpEntity<>(request),
                         deliveryPointTypeReference);
 

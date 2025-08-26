@@ -8,7 +8,7 @@ import com.fleetmanagement.delivery.rest.dto.DeliveryResponse;
 import com.fleetmanagement.delivery.usecase.command.MakeDelivery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class DeliveryController extends BaseController {
     private final UseCaseHandler<DeliveryResult, MakeDelivery> makeDeliveryUseCaseHandler;
 
-    @PutMapping
+    @PostMapping
     public DeliveryResponse deliver(@RequestBody DeliveryRequest request) {
         DeliveryResult deliveryResult = makeDeliveryUseCaseHandler.handle(request.toUseCase());
         log.info("DeliveryResult {} is created for request {}", deliveryResult, request);
